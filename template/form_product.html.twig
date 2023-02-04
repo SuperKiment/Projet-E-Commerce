@@ -1,0 +1,29 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Add Product{% endblock %}
+
+{% block content %}
+<form class="container" action="index.php?page=addProduct" method="POST">
+    <h1> Add Product </h1>
+
+    <div class="card px-3 bg-light" style="width: 25rem;">
+        <label for="productLabel">Label</label>
+        <input type="text" class="card" name="productLabel" id="productLabel">
+
+        <label for="productDescription">Description</label>
+        <textarea type="text" class="card" name="productDescription" id="productDescription" height="5"></textarea>
+
+        <label for="productPrice">Prix</label>
+        <input type="number" name="productPrice" id="productPrice">
+
+        <label for="productCategory">Catégorie</label>
+        <select name="productCategory" id="productCategory" class="form-select">
+            <option value="1">Carte Graphique</option>
+            <option value="2">Disque Dur</option>
+        </select>
+
+        <br>
+        <input type="submit" value="Submit" style="width: 5rem;" class="bg-success text-light" name="btnAddProduct">
+    </div>
+</form>
+{% endblock %}

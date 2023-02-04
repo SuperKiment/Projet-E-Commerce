@@ -7,6 +7,14 @@
     <h1> Add Product </h1>
 
     <div class="card px-3 bg-light" style="width: 25rem;">
+
+        {% if form.state == "success" %}
+        <div style="color: green;">{{form.message}} </div>
+        {% endif %}
+        {% if form.state == "danger" %}
+        <div style="color: red;">{{form.message}} </div>
+        {% endif %}
+
         <label for="productLabel">Label</label>
         <input type="text" class="card" name="productLabel" id="productLabel">
 
@@ -17,9 +25,12 @@
         <input type="number" name="productPrice" id="productPrice">
 
         <label for="productCategory">Catégorie</label>
+
         <select name="productCategory" id="productCategory" class="form-select">
-            <option value="1">Carte Graphique</option>
-            <option value="2">Disque Dur</option>
+            {% for category in categories %}
+            <option value="{{category.id}}">{{category.label}}</option>
+
+            {% endfor %}
         </select>
 
         <br>

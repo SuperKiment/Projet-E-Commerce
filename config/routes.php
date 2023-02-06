@@ -7,8 +7,11 @@ $routes = [
     'mentionsLegales' => 'mentionsLegalesController',
     'notFound' => 'notFoundController',
     'dbError' => 'dbErrorController',
+
     'addProduct' => 'addProductController',
     'updateProduct' => 'updateProductController',
-    'addCategory' => 'addCategoryController',
+    'deleteProduct' => 'deleteProductController',
     'showProduct' => 'showProductController',
+
+    'addCategory' => 'addCategoryController',
 ];

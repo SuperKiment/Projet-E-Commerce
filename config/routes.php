@@ -8,6 +8,7 @@ $routes = [
     'notFound' => 'notFoundController',
     'dbError' => 'dbErrorController',
     'addProduct' => 'addProductController',
+    'updateProduct' => 'updateProductController',
     'addCategory' => 'addCategoryController',
     'showProduct' => 'showProductController',
 ];

@@ -7,7 +7,7 @@ function addProductController($twig, $db)
 
     $form = [];
 
-    if (isset($_POST['btnAddProduct'])) {
+    if (isset($_POST['btnPostProduct'])) {
         $label = htmlspecialchars($_POST['productLabel']);
         $description = htmlspecialchars($_POST['productDescription']);
         $price = htmlspecialchars($_POST['productPrice']);
@@ -37,6 +37,7 @@ function addProductController($twig, $db)
 
     echo $twig->render('addProduct.html.twig', [
         'form' => $form,
-        'categories' => getAllCategories($db)
+        'categories' => getAllCategories($db),
+        'page' => '?page=addProduct'
     ]);
 }

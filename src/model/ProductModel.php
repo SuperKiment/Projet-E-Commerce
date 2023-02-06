@@ -22,12 +22,40 @@ function getAllProducts($db)
     return $product;
 }
 
-function saveProduct($db, $label, $description, $price, $category) {
-    $query = $db -> prepare("INSERT INTO product (label, `description`, price, idCategory) VALUES (:label, :descr, :price, :idCategory)");
-    return $query -> execute([
+function saveProduct($db, $label, $description, $price, $category)
+{
+    $query = $db->prepare("INSERT INTO product (label, `description`, price, idCategory) VALUES (:label, :descr, :price, :idCategory)");
+    return $query->execute([
         'label' => $label,
         'descr' => $description,
         'price' => $price,
         'idCategory' => $category
     ]);
+}
+
+function updateOneProduct($db, $id, $label, $description, $price, $category)
+{
+    $query = $db->prepare("UPDATE product SET label=:label,
+    `description`=:descr, price=:price, idCategory=:category WHERE id=:id");
+    return $query->execute([
+        'id' => $id,
+        'label' => $label,
+        'descr' => $description,
+        'price' => $price,
+        'category' => $category,
+    ]);
+}
+
+function deleteOneProduct($db, $id)
+{
+    $query = $db->prepare("DELETE FROM product WHERE id=:id");
+    $query->execute([
+        'id' => $id
+    ]);
+    if ($query->rowCount() > 0) {
+        $result = true;
+    } else {
+        $result = false;
+    }
+    return $result;
 }

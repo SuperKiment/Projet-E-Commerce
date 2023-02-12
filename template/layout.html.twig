@@ -34,17 +34,39 @@
 
                     <li class="nav-item"><a href="?page=about" class="nav-link">About</a></li>
 
+                    {% if session.auth is defined %}
+                    {% if session.auth.role == 2 %}
                     <li class="nav-item">
                         <div class="dropdown">
-                            <button class="dropdown-toggle nav-link bg-dark border-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              Administration
+                            <button class="dropdown-toggle nav-link bg-dark border-dark" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Administration
                             </button>
                             <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="?page=adminProducts">Gérer les Produits</a></li>
-                              <li><a class="dropdown-item" href="?page=adminProductCategories">Gérer les Catégories</a></li>
+                                <li><a class="dropdown-item" href="?page=adminProducts">Gérer les Produits</a></li>
+                                <li><a class="dropdown-item" href="?page=adminProductCategories">Gérer les
+                                        Catégories</a></li>
                             </ul>
-                          </div>
+                        </div>
                     </li>
+                    {% endif %}
+
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="dropdown-toggle nav-link bg-dark border-dark" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ session.auth.login }}
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="">Mon panier (0)</a></li>
+                                <li><a class="dropdown-item text-danger" href="?page=logout">Deconnexion</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item"><a href="?page=register" class="btn ms-2 text-light">S'inscrire</a></li>
+                    <li class="nav-item"><a href="?page=login" class="btn btn-success ms-2">Se connecter</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

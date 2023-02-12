@@ -2,7 +2,7 @@
 
 function getOneProduct($db, $idProduct)
 {
-    $query = $db->prepare("SELECT id, label, `description`, price, idCategory FROM product WHERE id=:id");
+    $query = $db->prepare("SELECT id, label, `description`, price, idCategory, `image` FROM product WHERE id=:id");
     $query->execute([
         'id' => $idProduct
     ]);
@@ -14,7 +14,7 @@ function getOneProduct($db, $idProduct)
 
 function getAllProducts($db)
 {
-    $query = $db->prepare("SELECT id, label, `description`, price, idCategory FROM product");
+    $query = $db->prepare("SELECT id, label, `description`, price, idCategory, `image` FROM product");
     $query->execute([]);
 
     $product = $query->fetchAll();
@@ -22,14 +22,15 @@ function getAllProducts($db)
     return $product;
 }
 
-function saveProduct($db, $label, $description, $price, $category)
+function saveProduct($db, $label, $description, $price, $category, $image)
 {
-    $query = $db->prepare("INSERT INTO product (label, `description`, price, idCategory) VALUES (:label, :descr, :price, :idCategory)");
+    $query = $db->prepare("INSERT INTO product (label, `description`, price, idCategory, `image`) VALUES (:label, :descr, :price, :idCategory, :image)");
     return $query->execute([
         'label' => $label,
         'descr' => $description,
         'price' => $price,
-        'idCategory' => $category
+        'idCategory' => $category,
+        'image' => $image
     ]);
 }
 

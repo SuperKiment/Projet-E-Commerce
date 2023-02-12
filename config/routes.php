@@ -12,6 +12,8 @@ $routes = [
     'updateProduct' => 'updateProductController',
     'deleteProduct' => 'deleteProductController',
     'showProduct' => 'showProductController',
+    'adminProducts' => 'adminProductsController',
+    'adminProductCategories' => 'adminProductCategoriesController',
 
     'addCategory' => 'addCategoryController',
 ];

@@ -21,6 +21,7 @@ function initRouter($routes, $db)
     //$controller devient HomeController (nom du fichier)
     $controller = ucfirst($route);
 
+
     //Require le fichier controller HomeController.php
     require_once 'controller/' . $controller . '.php';
     return $controller;

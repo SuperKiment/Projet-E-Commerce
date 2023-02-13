@@ -6,6 +6,14 @@ function loginController($twig, $db)
 
     $form = [];
 
+    if (isset($_SESSION['auth'])) {
+        echo $twig->render('home.html.twig', [
+            'form' => $form
+        ]);
+
+        return 0;
+    }
+
     if (isset($_POST['submitLogin'])) {
         if (
             isset($_POST['email']) &&

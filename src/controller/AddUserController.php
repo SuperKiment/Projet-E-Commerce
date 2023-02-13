@@ -2,7 +2,7 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 
-function registerController($twig, $db)
+function addUserController($twig, $db)
 {
     include_once '../src/model/UserModel.php';
 
@@ -65,7 +65,7 @@ function registerController($twig, $db)
 
                         $form = [
                             'state' => 'success',
-                            'message' => $form['message'] . " Vous êtes maintenant inscrit au site"
+                            'message' => $form['message'] . " Cette personne est maintenant inscrite !"
                         ];
                     } else {
                         $form = [
@@ -92,7 +92,7 @@ function registerController($twig, $db)
             ];
         }
     }
-    echo $twig->render('register.html.twig', [
+    echo $twig->render('addUser.html.twig', [
         'form' => $form
     ]);
 }

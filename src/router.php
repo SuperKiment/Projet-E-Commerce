@@ -18,11 +18,15 @@ function initRouter($routes, $db)
         $route = $routes["dbError"];
     }
 
-    //$controller devient HomeController (nom du fichier)
-    $controller = ucfirst($route);
-
-
-    //Require le fichier controller HomeController.php
+    $routeParameters = explode(':', $route);
+    $controller = ucfirst($routeParameters[0]);
+    $access = $routeParameters[1] ?? 0;
+    if ($access != 0) {
+        if (!isset($_SESSION['auth']) || $_SESSION['auth']['role'] < $access) {
+            $controller = "HomeController";
+        }
+    }
+    
     require_once 'controller/' . $controller . '.php';
     return $controller;
 }

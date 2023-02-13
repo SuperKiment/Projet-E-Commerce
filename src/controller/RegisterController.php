@@ -1,8 +1,11 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+
 function registerController($twig, $db)
 {
     include_once '../src/model/UserModel.php';
+
     $form = [];
     if (isset($_POST['submitRegister'])) {
         if (
@@ -25,6 +28,7 @@ function registerController($twig, $db)
                 $firstname = $_POST['firstname'];
                 if (!getOneUserCredentials($db, $email)) {
                     if ($password === $passwordConfirm) {
+                        /*
                         saveUser(
                             $db,
                             $email,
@@ -32,10 +36,36 @@ function registerController($twig, $db)
                             $lastname,
                             $firstname,
                             1
-                        );
+                        );*/
+
+
+                        include_once '../config/confMail.php';
+
+                        $mail = new PHPMailer();
+                        $mail->isSMTP(); // Paramétrer le Mailer pour utiliser SMTP 
+                        $mail->Host = 'smtp.office365.com'; // Spécifier le serveur SMTP
+                        $mail->SMTPAuth = true; // Activer authentication SMTP
+                        $mail->Username = $conf['email'];
+                        $mail->Password = $conf['mdp']; // Le mot de passe de cette adresse email
+                        $mail->SMTPSecure = 'tls'; // Accepter SSL
+                        $mail->Port = 587;
+                        $mail->setFrom($conf['email'], 'Site E-Commerce'); // Personnaliser l'envoyeur
+                        $mail->addAddress($email, $firstname . ' ' . $lastname);
+                        $mail->isHTML(true); // Paramétrer le format des emails en HTML ou non
+                        $mail->Subject = 'Inscription à Shop';
+                        $mail->Body = $twig->render('mail/register_message.html.twig', [
+                            'email' => $email
+                        ]);
+
+                        if (!$mail->send()) {
+                            $form['message'] = "Message non-envoyé !";
+                        }
+
+                        $form['message'] = '';
+
                         $form = [
                             'state' => 'success',
-                            'message' => "Vous êtes maintenant inscrit au site"
+                            'message' => $form['message'] . " Vous êtes maintenant inscrit au site"
                         ];
                     } else {
                         $form = [
